@@ -1,0 +1,173 @@
+<div
+  class="loading-overlay"
+  *ngIf="isLoading"
+  aria-live="polite"
+  aria-busy="true"
+>
+  <div class="spinner-border text-primary" role="status">
+    <span class="visually-hidden">Carregando...</span>
+  </div>
+</div>
+
+<div class="container" [class.content-loading]="isLoading">
+  <div class="row justify-content-center">
+    <div class="col-12 col-xl-10">
+      <form
+        class="mt-5"
+        #clientsForm="ngForm"
+        (ngSubmit)="onSubmit(clientsForm)"
+        novalidate
+      >
+        <div class="card mt-5">
+          <h5 class="card-header">Dados Pessoais</h5>
+          <div class="card-body">
+            <div class="row g-3">
+              <div class="col-12 col-md-6">
+                <label for="nome" class="form-label">Nome</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="nome"
+                  name="nome"
+                  [(ngModel)]="client.nome"
+                  #nome="ngModel"
+                  [required]="true"
+                />
+                <div
+                  class="invalid-feedback"
+                  [class.d-block]="clientsForm.submitted && nome.invalid"
+                >
+                  Por favor digite o nome.
+                </div>
+              </div>
+
+              <div class="col-12 col-md-6">
+                <label for="email" class="form-label">Email</label>
+                <input
+                  type="email"
+                  class="form-control"
+                  id="email"
+                  name="email"
+                  [(ngModel)]="client.email"
+                  #email="ngModel"
+                  [required]="true"
+                  email
+                />
+                <div
+                  class="invalid-feedback"
+                  [class.d-block]="clientsForm.submitted && email.invalid"
+                >
+                  Por favor digite o e-mail
+                </div>
+              </div>
+
+              <div class="col-12 col-md-6">
+                <label for="cpf" class="form-label">CPF</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="cpf"
+                  name="cpf"
+                  mask="000.000.000-00"
+                  [(ngModel)]="client.cpf"
+                  #cpf="ngModel"
+                  [required]="true"
+                />
+                <div
+                  class="invalid-feedback"
+                  [class.d-block]="clientsForm.submitted && cpf.invalid"
+                >
+                  Por favor digite um CPF válido!
+                </div>
+              </div>
+
+              <div class="col-12 col-md-6">
+                <label for="dataNascimento" class="form-label"
+                  >Data de Nascimento</label
+                >
+                <input
+                  type="date"
+                  class="form-control"
+                  id="dataNascimento"
+                  name="dataNascimento"
+                  [(ngModel)]="client.dataNascimento"
+                  #dataNascimento="ngModel"
+                  [required]="true"
+                />
+                <div
+                  class="invalid-feedback"
+                  [class.d-block]="
+                    clientsForm.submitted && dataNascimento.invalid
+                  "
+                >
+                  Por favor insira a data de nascimento.
+                </div>
+              </div>
+
+              <div class="col-8 col-md-4">
+                <label for="estado" class="form-label">Estado</label>
+                <select
+                  class="form-select"
+                  id="estado"
+                  name="estado"
+                  aria-label="Selecione o seu Estado"
+                  [(ngModel)]="client.estado"
+                  #estado="ngModel"
+                  [required]="true"
+                  (ngModelChange)="getAllMucipios($event)"
+                >
+                  <option [ngValue]="undefined">Selecione o seu Estado</option>
+                  <option *ngFor="let estado of estados" [value]="estado.sigla">
+                    {{ estado.nome }}
+                  </option>
+                </select>
+                <div
+                  class="invalid-feedback"
+                  [class.d-block]="clientsForm.submitted && estado.invalid"
+                >
+                  Por favor selecione o seu Estado.
+                </div>
+              </div>
+
+              <div class="col-8 col-md-4">
+                <label for="municipio" class="form-label">Municipio</label>
+                <select
+                  class="form-select"
+                  id="municipio"
+                  name="municipio"
+                  aria-label="Selecione o seu Municipio"
+                  [(ngModel)]="client.municipio"
+                  #municipio="ngModel"
+                  [required]="true"
+                >
+                  <option [ngValue]="undefined">
+                    Selecione o seu Municipio
+                  </option>
+                  <option *ngFor="let m of municipios" [value]="m.codigo_ibge">
+                    {{ m.nome }}
+                  </option>
+                </select>
+                <div
+                  class="invalid-feedback"
+                  [class.d-block]="clientsForm.submitted && municipio.invalid"
+                >
+                  Por favor selecione o seu Municipio.
+                </div>
+              </div>
+
+              <div class="col-12">
+                <button
+                  class="btn btn-primary"
+                  type="submit"
+                  [disabled]="isLoading"
+                >
+                  {{ buttonText }}
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

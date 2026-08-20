@@ -1,0 +1,84 @@
+<div class="container">
+  <div class="card mt-5" style="width: 18rem">
+    <div class="card-body">
+      <form (ngSubmit)="somar()">
+        <h2 class="ms-5">Calculadora</h2>
+        <div class="input-group input-group-lg">
+          <span class="input-group-text" id="input-1">Número 1</span>
+          <input
+            type="number"
+            class="form-control"
+            aria-label="Sizing example input"
+            aria-describedby="input-1"
+            [(ngModel)]="numero1"
+            [ngModelOptions]="{ standalone: true }"
+          />
+        </div>
+        <div class="input-group input-group-lg mt-2">
+          <span class="input-group-text" id="input-2">Número 2</span>
+          <input
+            type="number"
+            class="form-control"
+            aria-label="Sizing example input"
+            aria-describedby="input-2"
+            [(ngModel)]="numero2"
+            [ngModelOptions]="{ standalone: true }"
+          />
+        </div>
+        <div
+          class="mt-3 content-operators d-flex justify-content-around"
+          role="radiogroup"
+          aria-label="Operação"
+        >
+          <button
+            type="button"
+            class="operadores"
+            role="radio"
+            [class.selecionado]="operadorSelecionado === '+'"
+            [attr.aria-checked]="operadorSelecionado === '+'"
+            (click)="selecionarOperador('+')"
+          >
+            <span class="operador">+</span>
+          </button>
+
+          <button
+            type="button"
+            class="operadores"
+            role="radio"
+            [class.selecionado]="operadorSelecionado === '-'"
+            [attr.aria-checked]="operadorSelecionado === '-'"
+            (click)="selecionarOperador('-')"
+          >
+            <span class="operador">-</span>
+          </button>
+
+          <button
+            type="button"
+            class="operadores"
+            role="radio"
+            [class.selecionado]="operadorSelecionado === '/'"
+            [attr.aria-checked]="operadorSelecionado === '/'"
+            (click)="selecionarOperador('/')"
+          >
+            <span class="operador">/</span>
+          </button>
+
+          <button
+            type="button"
+            class="operadores"
+            role="radio"
+            [class.selecionado]="operadorSelecionado === '*'"
+            [attr.aria-checked]="operadorSelecionado === '*'"
+            (click)="selecionarOperador('*')"
+          >
+            <span class="operador">*</span>
+          </button>
+        </div>
+        <button type="submit" class="btn btn-primary mt-3">Calcular</button>
+      </form>
+      <div class="result mt-3">
+        <span>Resultado: {{ resultado }} </span>
+      </div>
+    </div>
+  </div>
+</div>

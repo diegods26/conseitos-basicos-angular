@@ -1,0 +1,66 @@
+<div class="container">
+  <div fxLayout="row" fxLayoutAlign="center">
+    <div fxLayout="column" fxFlex="1200px">
+      <form #buscaForm="ngForm" (ngSubmit)="searchClient()">
+        <div class="card mt-5">
+          <div class="card-body">
+            <h4>Consulta</h4>
+            <div class="d-flex" role="search">
+              <input
+                class="form-control me-2"
+                type="search"
+                placeholder="Pesquisa por Nome"
+                aria-label="Search"
+                [(ngModel)]="searchByName"
+                name="pesquisar"
+                fxFlex="600px"
+              />
+              <button class="btn btn-primary" type="submit">Pesquisar</button>
+            </div>
+
+            <div class="mt-4">
+              <table class="table table-bordered table-hover">
+                <thead class="table-primary">
+                  <tr>
+                    <th>ID</th>
+                    <th>Nome</th>
+                    <th>E-mail</th>
+                    <th>CPF</th>
+                    <th>Data Nascimento</th>
+                    <th></th>
+                  </tr>
+                </thead>
+                <tbody *ngFor="let client of clientList">
+                  <tr>
+                    <td>{{ client.id }}</td>
+                    <td>{{ client.nome }}</td>
+                    <td>{{ client.email }}</td>
+                    <td>{{ client.cpf }}</td>
+                    <td>{{ client.dataNascimento }}</td>
+                    <td>
+                      <button
+                        type="button"
+                        class="btn btn-link p-0"
+                        aria-label="Editar cliente"
+                        (click)="sendToEdit(client.id)"
+                      >
+                        <mat-icon aria-hidden="true">edit</mat-icon>
+                      </button>
+                      <button
+                        type="button"
+                        class="btn btn-link p-0 color"
+                        aria-label="Editar cliente"
+                      >
+                        <mat-icon aria-hidden="true" (click)="openModal(client)">delete</mat-icon>
+                      </button>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

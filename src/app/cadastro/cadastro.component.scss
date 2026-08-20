@@ -1,0 +1,21 @@
+.card {
+  width: 100%;
+}
+
+.invalid-feedback.d-block {
+  display: block;
+}
+
+.loading-overlay {
+  align-items: center;
+  background-color: rgba(255, 255, 255, 0.75);
+  display: flex;
+  inset: 0;
+  justify-content: center;
+  position: fixed;
+  z-index: 1050;
+}
+
+.content-loading {
+  pointer-events: none;
+}
